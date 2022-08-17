@@ -1,0 +1,19 @@
+{
+    "1":{
+       "title":"Self - Appraisal, change and ambition",
+       "info":"Time for change",
+       "progress":0,
+       "pages":{
+          "1":"For your next steps, you will very likely need to make changes.<br/> Changes in your thinking, changes in your behaviour patterns, even changes regarding who you listen to and how you respond.<br/>Are you ready to start making some changes?",
+          "2":"What would you like to do, to which other people may respond 'it cannot be done'"
+        }
+      }, 
+      "2":{
+        "title":"What Have I Got to Offer",
+       "info":"Self assess yourself",
+       "progress":0,
+       "pages":{
+        "1":"Who are you trrying to please?"
+        }
+     }
+    }
