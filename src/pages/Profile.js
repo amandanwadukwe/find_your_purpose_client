@@ -29,7 +29,8 @@ export default function Profile(props) {
 
     props.menu();
 
-
+    console.log(accountInformation);
+    
     function redirectToLesson() {
 
         window.location.href = `http://localhost:3000/lessons/${acitvatedUnfinishedCourse}`
@@ -78,5 +79,19 @@ export default function Profile(props) {
                     <button type="button">Get started</button>
                 </section>
             )) : (<div>Loading...</div>)}
+            {accountInformation[0] !== undefined ?(<div>
+                    <p><b>Notes</b></p>
+                    {
+                        Object.entries(accountInformation[0].notes).map(note => {
+                            console.log("note x", note[0]);
+                            return <div style={{backgroundColor:"#ffffff", color:"#1491c9", width:"100%"}} className="lesson">
+                                <h2>{note[0]}</h2>
+                                <p>{note[1]}</p>
+                            </div>
+                        })
+                    }
+            </div>):(<div>
+                Loading...
+            </div>)}
     </section>
 }

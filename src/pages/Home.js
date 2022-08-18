@@ -6,14 +6,15 @@ import { useSwipeable } from "react-swipeable";
 import { useParams } from "react-router-dom";
 
 export default function Home(props) {
-    const [allCourses, setAllCourses] = useState("");
-    const [accountInformation, setAccountInformation] = useState("");
+    const [allCourses, setAllCourses] = useState([]);
+    const [accountInformation, setAccountInformation] = useState([]);
     const [coursesError, setCoursesError] = useState("");
     const [username, setUserName] = useState("");
     const [enrolledCoursesPosition,setEnrolledCoursesPosition] = useState(0);
     const [activeInfoChapterName, setActiveInfoChapterName] = useState(0);
     const [showDescription, setShowDescription] = useState(false);
 
+    // console.log("account info", accountInformation)
     let acitvatedUnfinishedCourse = "";
     props.menu();
 

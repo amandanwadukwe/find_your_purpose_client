@@ -8,7 +8,7 @@ import Character from "../resources/character.png";
 import axios from "axios";
 
 export default function Navigation(props){
-    const [accountInformation, setAccountInformation] = useState("");
+    const [accountInformation, setAccountInformation] = useState([]);
     const [error, setError] = useState("");
 
     useEffect(() => {
@@ -28,7 +28,7 @@ export default function Navigation(props){
             <div onClick={()=>{window.location.href =`/profile`}}>
                 <h2 className="name">{accountInformation.length > 0 ?`${accountInformation[0].first_name} ${accountInformation[0].last_name}`:`Loading...`}</h2>
                 {/* add this to the registration form and the database */}
-                <span className="pronouns">She/her</span>
+                <span className="pronouns">{accountInformation.length > 0 ? `${accountInformation[0].pronouns}`:`Loading ...`}</span>
             </div>
         </div>
         <ul>
