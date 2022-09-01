@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Edit from "../resources/edit.svg";
 
 export default function Notes(props){
     const [notes, setNotes] = useState([{
@@ -22,6 +23,7 @@ export default function Notes(props){
                     setTitle(note.title);
                     setNote(note.note);
                     }}>
+                    <img  style={{marginLeft:"auto",display:"flex"}}src={Edit} className="page-icon animate-on-hover-icon" alt="edit note"/>
                     <h2>{note.title}</h2>
                     <p>{note.note}</p>
                     <span>{note.date}</span>

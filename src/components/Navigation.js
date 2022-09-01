@@ -5,6 +5,8 @@ import Notes from "../resources/notes.svg";
 import Room from "../resources/meeting_room.svg";
 import Settings from "../resources/settings.svg";
 import Character from "../resources/character.png";
+import { CSSTransition } from 'react-transition-group';
+
 import axios from "axios";
 
 export default function Navigation(props){
@@ -20,7 +22,16 @@ export default function Navigation(props){
     }, [])
     console.log(accountInformation)
 
-    return <nav className={props.showPrimaryNavigation? "primary-navigation display":"hide"}>
+    // return <nav className={props.showPrimaryNavigation? "primary-navigation display":"hide"}>
+    return <CSSTransition
+    in={props.showPrimaryNavigation}
+    timeout={300}
+    classNames="primary-navigation"
+    unmountOnExit
+    // onEnter={() => setShowButton(false)}
+    // onExited={() => setShowButton(true)}
+  ><nav className="primary-navigation">
+
         <span>{error}</span>
 
         <div className="navigation-profile">
@@ -44,5 +55,5 @@ export default function Navigation(props){
 
         </ul>
     </nav>
-
+</CSSTransition>
 }

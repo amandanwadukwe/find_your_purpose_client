@@ -1,3 +1,5 @@
+
+
 .App {
   /* text-align: center; */
   overflow-x:hidden;
@@ -58,6 +60,7 @@ select{
 }
 .hide{
   display: none;
+  transition:all 2s linear;
 }
 .radio-btns-container{
   width:100%;
@@ -167,6 +170,24 @@ header{
   box-shadow: 1px 1px 1px rgba(0,0,0,0.2);
   transition:all .2s ease-in-out;
 }
+.primary-navigation-enter {
+  opacity: 0;
+  transform: scale(0.9);
+}
+.primary-navigation-enter-active {
+  opacity: 1;
+  transform: translateX(0);
+  transition: opacity 300ms, transform 300ms;
+}
+.primary-navigation-exit {
+  opacity: 1;
+}
+.primary-navigation-exit-active {
+  opacity: 0;
+  transform: scale(0.9);
+  transition: opacity 300ms, transform 300ms;
+}
+
 .avatar{
   width:60px;
   height:60px;
@@ -210,6 +231,7 @@ header{
   width:90%;
   display: flex;
   justify-content: flex-end;
+  align-items:center;
 }
 .personal-details{
   display:flex;
@@ -386,6 +408,9 @@ width: 90%;
   main{
     width:70vw;
     margin:0 auto;
+  }
+  .lesson-container{
+    width:50vw;
   }
   .to-left h1{
     display:inline-block;

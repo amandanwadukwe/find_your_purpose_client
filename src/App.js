@@ -28,7 +28,7 @@ setShowMenu(true)
   }
   return (
     <div className="App">
-      <Header handleMenuClick={handleMenuClick}  menuStatus={showMenu}/>
+      <Header handleMenuClick={handleMenuClick}  menuStatus={showMenu} showPrimaryNavigation={showPrimaryNavigation}/>
       <Navigation showPrimaryNavigation={showPrimaryNavigation}/>
       <Router>
             <Routes>

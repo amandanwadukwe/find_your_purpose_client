@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import Character from "../resources/character.png";
+import Edit from "../resources/edit.svg";
 import Settings from "../resources/settings.svg";
 import axios from "axios";
 
@@ -38,7 +39,8 @@ export default function Profile(props) {
 
     return <section className="profile-container">
         <div className="icon-to-left">
-            <img onClick={()=>{window.location.href=`/settings`}} className="animate-on-hover-icon" src={Settings} alt="settings" />
+            <img onClick={()=>{window.location.href=`/settings`}} className="page-icon animate-on-hover-icon" src={Settings} alt="settings" />
+            <button type="button" onClick={()=> window.location.href="/"} style={{marginLeft:"1rem"}}>Log out</button>
         </div>
         <div className="personal-details">
             <img src={Character} className="avatar" alt="Your avatar" />
@@ -85,6 +87,8 @@ export default function Profile(props) {
                         Object.entries(accountInformation[0].notes).map(note => {
                             console.log("note x", note[0]);
                             return <div style={{backgroundColor:"#ffffff", color:"#1491c9", width:"100%"}} className="lesson">
+                                                    <img  style={{marginLeft:"auto",display:"flex"}}src={Edit} className="page-icon animate-on-hover-icon" alt="edit note"/>
+
                                 <h2>{note[0]}</h2>
                                 <p>{note[1]}</p>
                             </div>

@@ -8,12 +8,14 @@ export default function Lessons(props) {
     const [allCourses, setAllCourses] = useState([]);
     const [activeChapterNumber, setActiveChapterNumber] = useState(Number(chapterDetails.split("-")[0]));
     const [activePageNumber, setActivePageNumber] = useState(Number(chapterDetails.split("-")[1]));
+    const [activeCourseCode, setActiveCourseCode] = useState(1);
     const [userResponse, setUserResponse] = useState("")
     const [endOfPage, setEndOfPage] = useState(false);
+    const [errorMsg, setErrorMessage] = useState("");
 
 
 
-    console.log(userResponse)
+  
 
     useEffect(() => {
         axios.get('http://localhost:5000/courses')
@@ -21,11 +23,23 @@ export default function Lessons(props) {
             .catch(err => console.log(err))
     }, [])
 
+    useEffect(()=> {
+        axios.post('http://localhost:5000/last-viewed-page', {
+        "activeCourseCode":1,
+        "activeChapterNumber":activeChapterNumber,
+        "activePageNumber":activePageNumber,
+        "email": "amandanwadukwe@gmail.com"
+    })
+    .then(result => console.log(result))
+    .catch(err => setErrorMessage(err))
+    }, [activeChapterNumber, activePageNumber])
+
     props.menu();
 
 
     return <section className="lesson-container">
         <div>
+            <span>{errorMsg}</span>
             {allCourses.map(course => {
                 let numberOfPagesInCurrentChapter = Object.values(course.chapters[`${activeChapterNumber}`].pages).length
                 let numberOfChaptersInCourse = Object.values(course.chapters).length

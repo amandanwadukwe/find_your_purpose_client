@@ -1,4 +1,6 @@
 import Menu from "../resources/menu.svg";
+import Close from "../resources/close.svg";
+
 import Logo from "../resources/lyc-logo-nobackground.png"
 
 export default function Header(props){
@@ -10,7 +12,7 @@ export default function Header(props){
             <h1>Lancashire Youth Challenge</h1>
         </div>
         <div className="to-right">
-            <img className={props.menuStatus ? "menu animate-on-hover-icon": "hide"} onClick={props.handleMenuClick} src={Menu} alt="menu"/>
+            <img className={props.menuStatus ? "menu animate-on-hover-icon": "hide"} onClick={props.handleMenuClick} src={props.showPrimaryNavigation ? Close:Menu} alt="menu"/>
         </div>
     </header>
 }
