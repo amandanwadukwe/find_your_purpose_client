@@ -17,6 +17,7 @@ export default function LoginAndReg(props){
     function handleLogin(){
         axios.get(`http://localhost:5000/${email}-${password}`)
         .then(res => {
+            console.log(res.data)
             res.data.length > 0 ? window.location.href = `/home/${email}`:setLoginErrorMsg("This account does not exist") ;
             // console.log(res)
         })
@@ -39,6 +40,7 @@ export default function LoginAndReg(props){
         //     password:password,
         //     date: new Date()
         // })
+        console.log("Registration is being handled...")
         axios.post("http://localhost:5000/account", {
             "first_name":firstName,
             "last_name":lastName,
@@ -51,9 +53,10 @@ export default function LoginAndReg(props){
             "settings":{}
         })
         .then(result => {
-            console.log(result)
+            console.log("next route: ", `/home/${email}`)
+            console.log("result: ", result)
             window.location.href = `/home/${email}`})
-        .catch(err => setErrorMsg(err))
+        .catch(err => console.log(err))
     }else{
         setErrorMsg("Passwords don't match");
     }

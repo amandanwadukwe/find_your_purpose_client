@@ -2,7 +2,11 @@ import { useState, useEffect } from "react";
 import Character from "../resources/character.png";
 import Edit from "../resources/edit.svg";
 import Settings from "../resources/settings.svg";
+import { useParams } from "react-router-dom";
 import axios from "axios";
+
+export let userEmailFromProfile ;
+
 
 export default function Profile(props) {
     // const [username, setUsername] = useState("");
@@ -14,6 +18,12 @@ export default function Profile(props) {
     const [showDescription, setShowDescription] = useState(false);
     let acitvatedUnfinishedCourse = "";
 
+    let {email} = useParams();
+
+    useEffect(() => {
+        userEmailFromProfile = email;
+       }, [email])
+
     useEffect(() => {
         axios.get("http://localhost:5000/courses")
             .then(res => setAllCourses(res.data))
@@ -21,16 +31,16 @@ export default function Profile(props) {
     }, [])
 
     useEffect(() => {
-        axios.get("http://localhost:5000/account/amandanwadukwe@gmail.com")
+        axios.get(`http://localhost:5000/account/${email}`)
             .then(res => {
-                setAccountInformation(res.data)
+                setAccountInformation(res.data.filter(account => account.email == email))
             })
             .catch(err => setError(err))
     }, [])
 
     props.menu();
 
-    console.log(accountInformation);
+    // console.log(accountInformation);
     
     function redirectToLesson() {
 
@@ -39,7 +49,7 @@ export default function Profile(props) {
 
     return <section className="profile-container">
         <div className="icon-to-left">
-            <img onClick={()=>{window.location.href=`/settings`}} className="page-icon animate-on-hover-icon" src={Settings} alt="settings" />
+            <img onClick={()=>{window.location.href=`/settings/${accountInformation[0].email}`}} className="page-icon animate-on-hover-icon" src={Settings} alt="settings" />
             <button type="button" onClick={()=> window.location.href="/"} style={{marginLeft:"1rem"}}>Log out</button>
         </div>
         <div className="personal-details">
@@ -47,7 +57,7 @@ export default function Profile(props) {
 
             <h2 className="name">{accountInformation.length > 0 ? `${accountInformation[0].first_name} ${accountInformation[0].last_name}` : `Loading...`}</h2>
             {/* add this to the registration form and the database */}
-            <span className="pronouns">She/her</span>
+            <span className="pronouns">{accountInformation.length > 0 ? `${accountInformation[0].pronouns> 0 ? accountInformation[0].pronouns : "set your nickname"}` : `Loading...`}</span>
         </div>
         {accountInformation[0] !== undefined ?
             (accountInformation[0].enrolled_courses.length > 0 ? (
@@ -83,9 +93,10 @@ export default function Profile(props) {
             )) : (<div>Loading...</div>)}
             {accountInformation[0] !== undefined ?(<div>
                     <p><b>Notes</b></p>
-                    {
+                     {Object.entries(accountInformation[0].notes).length > 0 ? (
+                    
                         Object.entries(accountInformation[0].notes).map(note => {
-                            console.log("note x", note[0]);
+                            // console.log("note x", note[0]);
                             return <div style={{backgroundColor:"#ffffff", color:"#1491c9", width:"100%"}} className="lesson">
                                                     <img  style={{marginLeft:"auto",display:"flex"}}src={Edit} className="page-icon animate-on-hover-icon" alt="edit note"/>
 
@@ -93,7 +104,11 @@ export default function Profile(props) {
                                 <p>{note[1]}</p>
                             </div>
                         })
-                    }
+                    ) : (<div style={{display:"flex",justifyContent:"center"}}>
+                        <span>Add new notes in settings</span>
+                        <img  style={{marginLeft:"auto",display:"flex"}}src={Edit} className="page-icon animate-on-hover-icon" alt="edit note"/>
+
+                    </div>)}
             </div>):(<div>
                 Loading...
             </div>)}

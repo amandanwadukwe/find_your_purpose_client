@@ -1,5 +1,8 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import Edit from "../resources/edit.svg";
+
+export let userEmailFromNotes;
 
 export default function Notes(props){
     const [notes, setNotes] = useState([{
@@ -13,6 +16,12 @@ export default function Notes(props){
     const [note, setNote] = useState("");
 
     props.menu();
+
+    const {email} = useParams();
+
+    useEffect(() => {
+        userEmailFromNotes = email;
+       }, [email])
 
     
     return <section className="notes-container">

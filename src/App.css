@@ -4,6 +4,10 @@
   /* text-align: center; */
   overflow-x:hidden;
 }
+form{
+  width:100%;
+  margin:2rem auto;
+}
 button{
   display:block;
   background-color: #ffffff;
@@ -253,7 +257,7 @@ main{
 /* -------------------Courses-------------------- */
 .courses{
   width:90%;
-  margin:auto 0;
+  margin: 5rem 0;
 }
 .unfinished-courses{
   margin-top:10rem;
@@ -408,6 +412,9 @@ width: 90%;
   main{
     width:70vw;
     margin:0 auto;
+  }
+  form{
+    width:80%;
   }
   .lesson-container{
     width:50vw;

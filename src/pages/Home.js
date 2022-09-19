@@ -5,6 +5,9 @@ import celebration from "../resources/celebration_edit.png";
 import { useSwipeable } from "react-swipeable";
 import { useParams } from "react-router-dom";
 
+export let userEmail ;
+
+
 export default function Home(props) {
     const [allCourses, setAllCourses] = useState([]);
     const [accountInformation, setAccountInformation] = useState([]);
@@ -14,11 +17,17 @@ export default function Home(props) {
     const [activeInfoChapterName, setActiveInfoChapterName] = useState(0);
     const [showDescription, setShowDescription] = useState(false);
 
-    // console.log("account info", accountInformation)
+    // console.log("account info", accountInformation
     let acitvatedUnfinishedCourse = "";
     props.menu();
 
-    let { email } = useParams();
+
+   let { email } = useParams();
+
+   useEffect(() => {
+    userEmail = email;
+   }, [email])
+    
 
     const handlers = useSwipeable({
         onSwipedLeft:(eventData) => setEnrolledCoursesPosition(enrolledCoursesPosition-260),
@@ -83,7 +92,7 @@ export default function Home(props) {
             ) : (
                 <section className="courses">
                     <span>You have no saved work</span>
-                    <button type="button">Get started</button>
+                    <button type="button" onClick={()=>window.location.href = `/courses`}>Get started</button>
                 </section>
             )) : (<div>Loading...</div>)}
             </div>
@@ -115,7 +124,7 @@ export default function Home(props) {
             })}
         </section>) : (<section>
                 <p>You are not enrolled on any course, get enrolled now!</p>
-            <button type="butotn">Get started</button>
+            <button type="butotn" onClick={()=>window.location.href = `/courses`}>Get started</button>
             </section>)
         ) : (<div>
             Loading...

@@ -10,11 +10,19 @@ import Notes from './pages/Notes';
 import Courses from './pages/Courses';
 import LessonList from './pages/LessonList';
 import Settings from './pages/Settings';
+import Classroom from './pages/Classroom';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { userEmail } from './pages/Home';
+import { userEmailFromProfile } from './pages/Profile';
+import { userEmailFromNotes } from './pages/Notes';
+import { userEmailFromSettings } from './pages/Settings';
+import { userEmailFromClassroom } from './pages/Classroom';
 
 export default function App() {
   const [showPrimaryNavigation, setShowPrimaryNavigation] = useState(false);
   const [showMenu, setShowMenu] = useState(true);
+
+  
 
   function hideMenu(){
     setShowMenu(false);
@@ -26,20 +34,25 @@ setShowMenu(true)
   function handleMenuClick(){
     setShowPrimaryNavigation(!showPrimaryNavigation);
   }
+
+ 
+
+  
   return (
     <div className="App">
       <Header handleMenuClick={handleMenuClick}  menuStatus={showMenu} showPrimaryNavigation={showPrimaryNavigation}/>
-      <Navigation showPrimaryNavigation={showPrimaryNavigation}/>
+      <Navigation email={userEmail || userEmailFromClassroom || userEmailFromNotes || userEmailFromProfile || userEmailFromSettings} showPrimaryNavigation={showPrimaryNavigation}/>
       <Router>
             <Routes>
               <Route path="/" element={<LoginAndReg menu={hideMenu}/>} />
-              <Route path="/home/:email" element={<Home menu={displayMenu}/>} />
+              <Route path="/home/:email" element={<Home menu={displayMenu} />} />
               <Route path="/lessons/:chapterDetails" element={<Lessons menu={displayMenu} />} />
-              <Route path="/profile" element={<Profile menu={displayMenu}/>}/>
+              <Route path="/profile/:email" element={<Profile menu={displayMenu} email={userEmail}/>}/>
               <Route path="/notes/:email" element={<Notes menu={displayMenu} />}/>
               <Route path="/courses" element={<Courses menu={displayMenu} />}/>
               <Route path="/course/:name" element={<LessonList menu={displayMenu}/>}/>
               <Route path="/settings/:email" element={<Settings menu={displayMenu}/>}/>
+              <Route path="/classroom/:email" element={<Classroom />}/>
             </Routes>
       </Router>
     </div>
