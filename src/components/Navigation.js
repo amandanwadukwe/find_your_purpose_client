@@ -47,7 +47,7 @@ export default function Navigation(props){
         </div>
         <ul>
             <li onClick={()=>window.location.href = `/home/${accountInformation[0].email}`}><img src={Home} alt="home"/><span>Home</span></li>
-            <li onClick={()=>window.location.href = "/courses"}><img src={Book} alt="courses"/><span>Courses</span></li>
+            <li onClick={()=>window.location.href = `/courses/${accountInformation[0].email}`}><img src={Book} alt="courses"/><span>Courses</span></li>
             <li onClick={()=>window.location.href = `/notes/${accountInformation[0].email}`}><img src={Notes} alt="notes"/><span>Notes</span></li>
             <li onClick={()=>window.location.href = `/classroom/${accountInformation[0].email}`}><img src={Room} alt="classrooms"/><span>Classrooms</span></li>
             <li onClick={()=>window.location.href = `/settings/${accountInformation[0].email}`}><img src={Settings} alt="settings"/><span>Settings</span></li>

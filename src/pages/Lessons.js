@@ -3,6 +3,8 @@ import React, { useState, useEffect } from "react";
 import { useParams } from 'react-router-dom';
 import ThumbsUp from "../resources/thumbs_up.png";
 
+export let userEmailFromLessons;
+
 export default function Lessons(props) {
     let { chapterDetails } = useParams();
     const [allCourses, setAllCourses] = useState([]);
@@ -14,7 +16,11 @@ export default function Lessons(props) {
     const [errorMsg, setErrorMessage] = useState("");
 
 
+    let { email } = useParams();
 
+    useEffect(() => {
+     userEmailFromLessons = email;
+    }, [email])
   
 
     useEffect(() => {
@@ -28,7 +34,7 @@ export default function Lessons(props) {
         "activeCourseCode":1,
         "activeChapterNumber":activeChapterNumber,
         "activePageNumber":activePageNumber,
-        "email": "amandanwadukwe@gmail.com"
+        "email": email
     })
     .then(result => console.log(result))
     .catch(err => setErrorMessage(err))
@@ -36,6 +42,7 @@ export default function Lessons(props) {
 
     props.menu();
 
+    
 
     return <section className="lesson-container">
         <div>

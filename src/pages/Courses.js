@@ -1,5 +1,8 @@
 import { useState, useEffect} from "react";
+import { useParams } from "react-router-dom";
 import axios from "axios";
+
+export let userEmailFromCourses;
 
 export default function Courses(props){
     const [allCourses, setAllCourses] = useState([]);
@@ -13,12 +16,18 @@ export default function Courses(props){
 
     props.menu();
 
+    let { email } = useParams();
+
+   useEffect(() => {
+    userEmailFromCourses = email;
+   }, [email])
+
 allCourses.map(course => console.log(course.course_name))
     return <section>
         <span>{courseError}</span>
         <div className="lessons">
         {allCourses.map(course => {
-            return <div className="lesson" onClick={()=>window.location.href = `http://localhost:3000/course/${course.course_name}`}>
+            return <div className="lesson" onClick={()=>window.location.href = `http://localhost:3000/course/${course.course_name}/${email}`}>
                 <div>i</div>
                 <span>A job preparation course</span>
                 <h2>{course.course_name}</h2>

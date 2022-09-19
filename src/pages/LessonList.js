@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from 'react-router-dom';
 
+export let userEmailFromLessonList;
 
 export default function LessonList(props){
     const [allCourses, setAllCourses] = useState([]);
@@ -10,6 +11,12 @@ export default function LessonList(props){
     let {name} = useParams();
 
     props.menu();
+
+    let { email } = useParams();
+
+    useEffect(() => {
+     userEmailFromLessonList = email;
+    }, [email])
 
 
     useEffect(() => {
@@ -25,7 +32,7 @@ export default function LessonList(props){
             {allCourses.map(course =>{
                 if(name === course.course_name){
                     return Object.values(course.chapters).map((chapter,chapterIndex) => {
-                        return <div className="lesson" onClick={()=> window.location.href = `/lessons/${chapterIndex+1}-1`}>
+                        return <div className="lesson" onClick={()=> window.location.href = `/lessons/${chapterIndex+1}-1/${email}`}>
                             <div>i</div>
                             <span>{chapter.info}</span>
                             <h2>{chapter.title}</h2>
